@@ -1,6 +1,11 @@
 let computerChoice;
 let roundResult;
 
+let playerScore = 0;
+let computerScore = 0;
+
+game();
+
 function computerPlay()
 {
     let randomNumber = Math.floor(Math.random() * 3) + 1;
@@ -23,76 +28,104 @@ function computerPlay()
     return computerChoice;
 }
 
-function game()
-{
-    for (i = 0; i < 5; i++)
-    {
-        let playerChoice = prompt("Rock Paper Scissors, Shoot!");
-        playRound(playerChoice, computerPlay());
-    }
-}
-
 function playRound (playerChoice, computerChoice)
 {
     if (playerChoice.toLowerCase() == "rock")
     {
-        if (computerChoice() == "rock")
-        {
-            console.log("It's a tie!");
-            roundResult = "tie";
-        }
-        else if (computerChoice() == "paper")
-        {
-            console.log("You lose! Paper beats rock!");
-            roundResult = "computer";
-        }
-        else if (computerChoice() == "scissors")
-        {
-            console.log("You win!");
-            roundResult = "player";
-        }
+        playedRock();
     }
 
-    else if (playerChoice.toLowerCase() == "paper")
+    if (playerChoice.toLowerCase() == "paper")
     {
-        if (computerChoice() == "paper")
-        {
-            console.log("It's a tie!");
-            roundResult = "tie";
-        }
-        else if (computerChoice() == "scissors")
-        {
-            console.log("You lose! Scissors beats paper!");
-            roundResult = "computer";
-        }
-        else if (computerChoice() == "rock")
-        {
-            console.log("You win!");
-            roundResult = "player";
-        }
+        playedPaper();
     }
 
-    else if (playerChoice.toLowerCase() == "scissors")
+    if (playerChoice.toLowerCase() == "scissors")
     {
-        if (computerChoice() == "scissors")
+        playedScissors();
+    }
+}
+
+function playedScissors() 
+{
+    if (computerPlay() == "scissors") 
+    {
+        roundResult = "tie";
+    }
+    if (computerPlay() == "rock") 
+    {
+        console.log("You lose! Rock beats scissors!");
+        roundResult = "computer";
+    }
+    if (computerPlay() == "paper") 
+    {
+        console.log("You win!");
+        roundResult = "player";
+    }
+}
+
+function playedPaper() 
+{
+    if (computerPlay() == "paper") 
+    {
+        roundResult = "tie";
+    }
+    if (computerPlay() == "scissors") 
+    {
+        roundResult = "computer";
+    }
+    if (computerPlay() == "rock") 
+    {
+        roundResult = "player";
+    }
+}
+
+function playedRock() {
+    if (computerPlay() == "rock") 
+    {
+        roundResult = "tie";
+    }
+    if (computerPlay() == "paper") 
+    {
+        roundResult = "computer";
+    }
+    if (computerPlay() == "scissors") 
+    {
+        roundResult = "player";
+    }
+}
+
+function game()
+{
+    for (i = 1; i <= 5; i++)
+    {
+        let playerChoice = prompt("Rock Paper Scissors, Shoot!");
+        playRound(playerChoice, computerPlay());
+        if (roundResult == "player")
+        {
+            console.log("You win! " + playerChoice + " beats " + computerChoice + "!");
+            playerScore++;
+        }
+        if(roundResult == "computer")
+        {
+            console.log("You lose! " + computerChoice + " beats " + playerChoice + "!");
+            computerScore++;
+        }
+        else 
         {
             console.log("It's a tie!");
-            roundResult = "tie";
-        }
-        else if (computerChoice() == "rock")
-        {
-            console.log("You lose! Rock beats scissors!");
-            roundResult = "computer";
-        }
-        else if (computerChoice() == "paper")
-        {
-            console.log("You win!");
-            roundResult = "player";
         }
     }
-
-    else 
+    if (playerScore > computerScore)
     {
-        console.error("Your input is not valid!");
+        console.log("You win the game with " + playerScore + " points");
+    }
+    else if (playerScore < computerScore)
+    {
+        console.log("You lost the game. The computer scored " + computerScore + " points");
+    }
+    else
+    {
+        console.log("It's a tie. You both got " + playerScore + "!");
     }
 }
