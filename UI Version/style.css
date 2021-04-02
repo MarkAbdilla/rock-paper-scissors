@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: black;
+    background-color: #3f3f3f;
 }
 
 header {
@@ -68,16 +68,16 @@ header > h1 {
 }
 
 .choice {
-    border: 4px solid white;
-    border-radius: 50%;
-    margin: 0 15px;
-    padding: 10px;
+    border: 7px solid white;
+    border-radius: 75%;
+    margin: 0 30px;
+    padding: 20px;
     display: inline-block;
 }
 
 .choice :hover {
     cursor: pointer;
-    background: red;
+    background: #545454;
 }
 
 #action-message {
